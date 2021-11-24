@@ -15,12 +15,18 @@ sed -i "" 's/.1/.6/' equil_temp.in
 
 for i in 110 120 #130 140 150 160 170 180 190 200 210 220 230 240 250
 do
-   t=$( bc <<<"scale=1; $i / 100" )
-   sed 's/equil_temp.out/equil_'$i'.in/' equil_temp.in > equil_$i.in
-   sed -i "" 's/temp/'$t'/' equil_$i.in
-   # Run equil.in files through md3 programme to get equilibrium stage files
-   # Run md3 to get production stage
-   # Organise files into relevant folders 
+  # Set actual temperature to variable t e.g. 1.1 instead of 110
+  t=$( bc <<<"scale=1; $i / 100" )
+
+  # Sets output file to have current temperature in the name of the output file
+  sed 's/equil_temp.out/equil_'$i'.out/' equil_temp.in > equil_$i.in
+
+  # Changes the placeholder temp to current temperature
+  sed -i "" 's/temp/'$t'/' equil_$i.in
+
+  # Run equillibrium stage using md3 with initial_coords_256 and equil_$i.in as input files
+  # Run production stage using md3 with equil_$i.out and prod_$i.in as input files
+  # Organise files into relevant folders 
 done
 
 exit 0
