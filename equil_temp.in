@@ -1,0 +1,8 @@
+Equilibrate 256 particles, density=0.7, T*=temp
+initial_coords_256
+equil_temp.out
+10000
+0.004
+0.7
+temp
+.6
