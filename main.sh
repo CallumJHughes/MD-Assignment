@@ -16,8 +16,13 @@ sed -i "" 's/.1/.6/' equil_temp.in
 # Include 100 in your loop
 for i in 110 120 #130 140 150 160 170 180 190 200 210 220 230 240 250
 do
+
   # Set actual temperature to variable t e.g. 1.1 instead of 110
   t=$( bc <<<"scale=1; $i / 100" )
+
+  ##############################
+  ### CREATE NECASSARY FILES ###
+  ##############################
 
   # Sets output file to have current temperature in the name of the output file
   sed 's/equil_temp.out/equil_'$i'.out/' equil_temp.in > equil_$i.in
@@ -43,6 +48,31 @@ do
   # Run production stage using md3 with equil_$i.out and prod_$i.in as input files
   # prod_$i.out and prod_$i.tup will be the output files
   ./md3 <prod_$i.in >prod_$i.tup
+
+  ##############
+  ### PART A ###
+  ##############
+
+  # Create data file from data in .tup file (U* and T*)
+
+  # Run fortran programme to find the block averages and instead of stdout, mean and variance will go to output file
+  # ./block_avg >> mean_variance_$i.dat
+
+  # Need to estimate errors???
+
+  ##############
+  ### PART B ###
+  ##############
+
+  # Plot U* against T*
+
+  # Obtain best fit cubic polynomial relating U* and T*
+
+  # Find expression for constant volume thermal capacity as a function of temperature (Outside of code)
+
+  ###############
+  ### TIDY UP ###
+  ###############
 
   # Make directories for equilibrium and production stage files
   mkdir Equilibrium
