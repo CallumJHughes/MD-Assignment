@@ -16,7 +16,6 @@ sed -i "" 's/.1/.6/' equil_temp.in
 # Include 100 in your loop
 for i in 110 120 #130 140 150 160 170 180 190 200 210 220 230 240 250
 do
-
   # Set actual temperature to variable t e.g. 1.1 instead of 110
   t=$( bc <<<"scale=1; $i / 100" )
 
@@ -53,10 +52,16 @@ do
   ### PART A ###
   ##############
 
-  # Create data file from data in .tup file (U* and T*)
+  # Create data file from data in .tup file (All values calculated)
+  sed -n '18,$p' prod_110.tup | sed '/^#/d' > prod_$i.dat
 
-  # Run fortran programme to find the block averages and instead of stdout, mean and variance will go to output file
+  # Separate U* and T* from rest of data (Internal energy is in column 5)
+  awk '{print $5,$2}' prod_$i.dat > UT_$i.dat
+
+  # Finds values of internal energy then finds error of the internal energy
+  # Then runs the  fortran programme block_avg to find the block averages and saves mean and variance to data file
   # ./block_avg >> mean_variance_$i.dat
+  awk '{print $1}' UT_$i.dat | awk '{print ($0+2.41)*-1}' ./block_avg # >> mean_variance.dat
 
   # Need to estimate errors???
 
@@ -87,6 +92,7 @@ do
   mkdir Production/in
   mkdir Production/out
   mkdir Production/tup
+  mkdir Production/dat
 
   # Organise equilibrium stage files into relevant directories
   mv equil_$i.in Equilibrium/in
@@ -97,6 +103,7 @@ do
   mv prod_$i.in Production/in
   mv prod_$i.out Production/out
   mv prod_$i.tup Production/tup
+  mv prod_$i.dat Production.dat
 done
 
 exit 0
