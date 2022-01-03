@@ -48,17 +48,18 @@ do
   # prod_$i.out and prod_$i.tup will be the output files
   ./md3 <prod_$i.in >prod_$i.tup
 
-  ##############
-  ### PART A ###
-  ##############
+  ####################################################################
+  ############################## PART A ##############################
+  ####################################################################
 
-  # Create data file from data in .tup file (All values calculated)
-  sed -n '18,$p' prod_110.tup | sed '/^#/d' > prod_$i.dat
+  # Create data file from data in .tup file (All values calculated; Step, Temp, Kinetic, Potential, Total Energy, Pressure)
+  # Also removes all comments in the .tup file and saves it to .dat file
+  sed -n '18,$p' prod_$i.tup | sed '/^#/d' > prod_$i.dat
 
-  # Separate U* and T* from rest of data (Internal energy is in column 5)
+  # Separate U* and T* from rest of data (Internal energy is in column 5 and temperature is in column 2)
   awk '{print $5,$2}' prod_$i.dat > UT_$i.dat
 
-  # Finds values of internal energy then finds error of the internal energy
+  # Finds values of internal energy then finds error of the internal energy by subtracting the true value of internal energy (2.41) and makes it positive.
   # Then runs the  fortran programme block_avg to find the block averages and saves mean and variance to data file
   # ./block_avg >> mean_variance_$i.dat
   awk '{print $1}' UT_$i.dat | awk '{print ($0+2.41)*-1}' ./block_avg # >> mean_variance.dat
