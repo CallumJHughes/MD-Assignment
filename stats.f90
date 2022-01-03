@@ -44,6 +44,8 @@ contains
   subroutine BlockAverage
     implicit none
 
+    N = N / 2
+
     allocate(blockData(N))
 
     do i = 1, N
