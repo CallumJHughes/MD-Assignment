@@ -19,9 +19,9 @@ do
   # Set actual temperature to variable t e.g. 1.1 instead of 110
   t=$( bc <<<"scale=1; $i / 100" )
 
-  ##############################
-  ### CREATE NECASSARY FILES ###
-  ##############################
+  ####################################################################################
+  ############################## CREATE NECASSARY FILES ##############################
+  ####################################################################################
 
   # Sets output file to have current temperature in the name of the output file
   sed 's/equil_temp.out/equil_'$i'.out/' equil_temp.in > equil_$i.in
@@ -64,13 +64,13 @@ do
   # ./block_avg >> mean_variance_$i.dat
   awk '{print $1}' UT_$i.dat | awk '{print ($1+2.41)*-1}' > U_err_$i.dat
 
-  ./block_avg # >> mean_variance.dat
+  ./compile.sh # Runs compile script which compiles am runs the necassary files to find block averaging
 
   # Need to estimate errors???
 
-  ##############
-  ### PART B ###
-  ##############
+  ####################################################################
+  ############################## PART B ##############################
+  ####################################################################
 
   # Plot U* against T*
 
@@ -78,9 +78,9 @@ do
 
   # Find expression for constant volume thermal capacity as a function of temperature (Outside of code)
 
-  ###############
-  ### TIDY UP ###
-  ###############
+  #####################################################################
+  ############################## TIDY UP ##############################
+  #####################################################################
 
   # Make directories for equilibrium and production stage files
   mkdir Equilibrium
