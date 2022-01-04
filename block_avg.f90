@@ -2,11 +2,17 @@ program block_avg
   use stats
   implicit none
 
-  real (kind=dp), dimension(:), allocatable :: blockData
+  N = 100 ! Needs to be size of data file e.g 10000
 
-  ! Read data from file and assign it to array blockData
-  open (unit=1, file=blob)
-  read (1,*) blockData
+  dataFile = 'U_err_110.dat' ! Needs to be looped
+
+  call FillArray ! Fills array Data  with data from dataFile to be used in BlockAverage subroutine
+
+  print *, Data
+
+
+  !call BlockAverage
+
+  !print *, blockData
   
-  call BlockAverage
 end program block_avg
