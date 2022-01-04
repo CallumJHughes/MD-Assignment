@@ -23,7 +23,7 @@ contains
   subroutine MeanVariance
     real (kind=dp) :: Mean, Variance, totalMean, totalVariance
 
-    totalMean = sum(inputData)   
+    totalMean = sum(inputData)
 
     Mean = totalMean / N
 
@@ -32,7 +32,7 @@ contains
     totalVariance = 0
 
     do i = 1, N
-      totalVariance = totalVariance + (inputData(i) - Mean)**2
+      totalVariance = totalVariance + ((inputData(i) - Mean)**2)
     end do
 
     Variance = totalVariance / N 
