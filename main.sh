@@ -62,7 +62,9 @@ do
   # Finds values of internal energy then finds error of the internal energy by subtracting the true value of internal energy (2.41) and makes it positive.
   # Then runs the  fortran programme block_avg to find the block averages and saves mean and variance to data file
   # ./block_avg >> mean_variance_$i.dat
-  awk '{print $1}' UT_$i.dat | awk '{print ($0+2.41)*-1}' ./block_avg # >> mean_variance.dat
+  awk '{print $1}' UT_$i.dat | awk '{print ($1+2.41)*-1}' > U_err_$i.dat
+
+  ./block_avg # >> mean_variance.dat
 
   # Need to estimate errors???
 
