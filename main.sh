@@ -66,8 +66,6 @@ do
 
   ./compile.sh # Runs compile script which compiles am runs the necassary files to find block averaging
 
-  # Need to estimate errors???
-
   ####################################################################
   ############################## PART B ##############################
   ####################################################################
@@ -106,7 +104,7 @@ do
   mv prod_$i.in Production/in
   mv prod_$i.out Production/out
   mv prod_$i.tup Production/tup
-  mv prod_$i.dat Production.dat
+  mv prod_$i.dat Production/dat
 done
 
 exit 0
