@@ -64,7 +64,7 @@ do
   # ./block_avg >> mean_variance_$i.dat
   awk '{print $1}' UT_$i.dat | awk '{print ($1+2.41)*-1}' > U_err_$i.dat
 
-  ./compile.sh # Runs compile script which compiles am runs the necassary files to find block averaging
+  ./compile_block.sh # Runs compile script which compiles am runs the necassary files to find block averaging
 
   ####################################################################
   ############################## PART B ##############################
@@ -75,6 +75,17 @@ do
   # Obtain best fit cubic polynomial relating U* and T*
 
   # Find expression for constant volume thermal capacity as a function of temperature (Outside of code)
+
+  ####################################################################
+  ############################## PART C ##############################
+  ####################################################################
+
+  # Find Cv for each trajectory using formula (Fortan code)
+  # Need average of K**2 and the average of K, squared (Use block averaging again; explain why)
+
+  ####################################################################
+  ############################## PART D ##############################
+  ####################################################################
 
   #####################################################################
   ############################## TIDY UP ##############################
@@ -108,3 +119,12 @@ do
 done
 
 exit 0
+
+####################################################################
+############################## NOTES ###############################
+####################################################################
+# - Get dataFile for block avereage code to be looped also (Done using sed??)
+# - Repeat process for block averages used for U for T aswell in part A
+# - Need mean for K in part C, therefore repeat process of block averages
+# - Need to create files for block average data
+# - Need to organise block average data in separate directories
