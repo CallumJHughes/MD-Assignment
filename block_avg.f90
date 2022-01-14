@@ -10,16 +10,6 @@ program block_avg
 
   call BlockTheData
 
-  !call printBlockAverage
-
-  ! Now repeat for temperature (Maybe in different file)
-
-  ! Change dataFile to required temperature file e.g. T_err_110.dat
-
-  ! call FillArray
-
-  ! call BlockTheData
-
 contains
   subroutine BlockTheData
     do while (mod(N,2) .EQ. 0) ! Checks if N is even

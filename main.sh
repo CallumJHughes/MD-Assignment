@@ -64,11 +64,14 @@ do
   # ./block_avg >> mean_variance_$i.dat
   awk '{print $1}' UT_$i.dat | awk '{print ($1+2.41)*-1}' > U_err_$i.dat
 
-  # Changes data file for internal energy data to required file
-  sed 's/U_err_.*.dat/U_err_'$i'.dat/' block_avg.f90
+  # Changes data file to required temperature error file
+  sed 's/= .*_err_.*.dat/= U_err_'$i'.dat/' block_avg.f90
 
   # Runs compile script which compiles and runs the necessary files to find block averaging of U* and T*
   ./compile_block.sh
+
+  # Changes data file to required temperature error file
+  sed 's/= .*_err_.*.dat/= T_err_'$i'.dat/' block_avg.f90
 
   ####################################################################
   ############################## PART B ##############################
