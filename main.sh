@@ -64,7 +64,7 @@ do
   # ./block_avg >> mean_variance_$i.dat
   awk '{print $1}' UT_$i.dat | awk '{print ($1+2.41)*-1}' > U_err_$i.dat
 
-  ./compile_block.sh # Runs compile script which compiles am runs the necassary files to find block averaging
+  ./compile_block.sh # Runs compile script which compiles and runs the necessary files to find block averaging of U* and T*
 
   ####################################################################
   ############################## PART B ##############################
@@ -128,3 +128,4 @@ exit 0
 # - Need mean for K in part C, therefore repeat process of block averages
 # - Need to create files for block average data
 # - Need to organise block average data in separate directories
+# - What file to plot U* vs T*
