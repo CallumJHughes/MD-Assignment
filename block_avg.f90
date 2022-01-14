@@ -2,7 +2,7 @@ program block_avg
   use stats
   implicit none
 
-  N = 8192 ! Needs to be size of data file e.g 10000 (1*(2**13)=8192)
+  N = 10000 ! Needs to be size of data file e.g 10000 (1*(2**13)=8192)
   
   dataFile = 'U_err_110.dat' ! Needs to be looped (will be looped in main script) (sed???)
 
@@ -30,9 +30,9 @@ contains
         inputData(i) = blockData(i)
       end do
       
-      print *, 'Size of data set is: ', size(blockData)
-      call MeanVariance
-      print * ! Prints empty line to space out the output values
+      !print *, 'Size of data set is: ', size(blockData)
+      !call MeanVariance
+      !print * ! Prints empty line to space out the output values
 
       ! If there are still data points to be blocked then the arrays are deallocated for the next loop
       ! Else the loop is exited and the arrays contain the last set of data aquired.
@@ -40,6 +40,8 @@ contains
         deallocate(blockData)
         deallocate(inputData)
       else
+        print *, 'Size of data set is: ', size(blockData)
+        call MeanVariance
         exit
       end if
       
