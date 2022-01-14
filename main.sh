@@ -77,11 +77,7 @@ do
   ############################## PART B ##############################
   ####################################################################
 
-  # Plot U* against T*
-
-  # Obtain best fit cubic polynomial relating U* and T*
-
-  # Find expression for constant volume thermal capacity as a function of temperature (Outside of code)
+  # I don't think this can be done in a script so has to be done manually
 
   ####################################################################
   ############################## PART C ##############################
@@ -89,6 +85,8 @@ do
 
   # Find Cv for each trajectory using formula (Fortan code)
   # Need average of K**2 and the average of K, squared (Use block averaging again; explain why)
+
+  
 
   ####################################################################
   ############################## PART D ##############################
