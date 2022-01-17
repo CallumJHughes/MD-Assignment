@@ -79,6 +79,9 @@ do
 
   # I don't think this can be done in a script so has to be done manually
 
+  # Create data file with all mean values for U* and T*
+  # Write out at each step
+
   ####################################################################
   ############################## PART C ##############################
   ####################################################################
