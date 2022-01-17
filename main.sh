@@ -65,13 +65,18 @@ do
   awk '{print $1}' UT_$i.dat | awk '{print ($1+2.41)*-1}' > U_err_$i.dat
 
   # Changes data file to required internal energy error file
-  sed "s/= .*.dat/= 'U_err_"$i".dat/" block_avg.f90
+  sed -i "" "s/= .*.dat/= 'U_err_"$i".dat/" block_avg.f90
 
-  # Runs compile script which compiles and runs the necessary files to find block averaging of U* and T*
+  # Runs compile script which compiles and runs the necessary files to find block averaging of U*
+  # Displays mean value and data set size to stdout
   ./compile_block.sh
 
-  # Changes data file to required temperature error file
-  sed "s/= .*.dat/= 'T_err_"$i".dat/" block_avg.f90
+  # Changes data file in block_avg.f90 code to required temperature error file
+  sed -i "" "s/= .*.dat/= 'T_err_"$i".dat/" block_avg.f90
+
+  # Runs compile script again expect data file is the temperature data file, as shown on line 74
+  # Displays mean value and data set size to stdout
+  ./compile_block.sh
 
   ####################################################################
   ############################## PART B ##############################
@@ -88,8 +93,17 @@ do
 
   # Find Cv for each trajectory using formula (Fortan code)
   # Need average of K**2 and the average of K, squared (Use block averaging again; explain why)
+  # Average of K is just equal to 3/2* N*kb*T
 
-  
+  ##################
+  # Create data file with kinetic energy values calculated from md3 programme
+  awk '{print $3}' prod_$i.dat #> K_$i.dat
+
+  # Changes data file in block_avg.f90 code to required kinetic energy file
+  sed -i "" "s/= .*.dat/= 'K_"$i".dat/" block_avg.f90
+
+  # Runs compile script again to find block averaging of Kinetic energy
+  ##################
 
   ####################################################################
   ############################## PART D ##############################
@@ -137,3 +151,4 @@ exit 0
 # - Need to create files for block average data
 # - Need to organise block average data in separate directories
 # - What file to plot U* vs T*
+# - What are the benefits of block averaging?
